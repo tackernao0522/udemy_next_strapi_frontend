@@ -1,0 +1,6 @@
+.next
+node_modules
+.ash_history
+/.DS_store
+.env
+.npm/
