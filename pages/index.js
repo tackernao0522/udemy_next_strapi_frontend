@@ -1,7 +1,12 @@
+import { Alert, Button } from "reactstrap"
+
 const index = () => {
   return (
     <div>
-      Hello Next.js
+      <div>
+        <Alert color="primary">Hello Project</Alert>
+        <Button color="primary">Hello from nexjs</Button>
+      </div>
     </div>
   );
 }

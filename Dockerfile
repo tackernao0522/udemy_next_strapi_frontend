@@ -15,5 +15,8 @@ WORKDIR ${HOME}
 COPY package*.json ./
 RUN yarn install
 
+
 # コンテナにNextプロジェクトをコピー
 COPY . ./
+
+# RUN yarn build
