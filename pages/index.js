@@ -1,5 +1,5 @@
 import { Col, Input, InputGroup, InputGroupText, Row } from "reactstrap"
-import RestaurantList from "../components/RestauranstList";
+import RestaurantList from "../components/RestaurantsList";
 
 const index = () => {
   return (
