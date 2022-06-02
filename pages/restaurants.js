@@ -5,47 +5,43 @@ import { useQuery } from "@apollo/react-hooks"
 import { useRouter } from "next/router"
 
 const GET_RESTAURANT_DISHES = gql`
-    {
-      query ($id: ID!) {
-        restaurant(id: $id) {
-          id
-          name
-          dishes {
-            id
-            description
-            price
-            image {
-              url
-            }
-          }
+  query ($id: ID!) {
+    restaurant(id: $id) {
+      id
+      name
+      dishes {
+        id
+        name
+        description
+        price
+        image {
+          url
         }
       }
     }
-`;
+  }
+`
 
-const Restaurants = (props) => {
+const Restaurants = () => {
   const router = useRouter()
   const { loading, error, data } = useQuery(GET_RESTAURANT_DISHES, {
-    variables: { id: router.query.id },
+    variables: { id: router.query.id }
   })
-
-  const { search } = props
+  // console.log(data)
 
   if (error) return "レストランの読み込みに失敗しました。"
 
   if (loading) return <h1>読み込み中・・・</h1>
 
   if (data) {
-    const searchQuery = data.restaurants.filter((restaurant) =>
-      restaurant.name.toLowerCase().includes(search)
-    )
+    const { restaurant } = data
     return (
       <Row>
-        {searchQuery.map((res) => (
+        {restaurant.dishes.map((res) => (
           <Col xs="6" sm="4" key={res.id}>
             <Card style={{ margin: "0 0.5rem 20px 0.5rem" }}>
               <CardImg
-                src={`${process.env.NEXT_PUBLIC_API_URL}${res.image[0].url}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}${res.image.url}`}
                 top={true}
                 style={{ height: 250 }}
               />
