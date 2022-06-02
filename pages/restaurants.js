@@ -2,22 +2,33 @@ import Link from "next/link";
 import { Card, CardBody, CardImg, CardTitle, Col, Row } from "reactstrap";
 import { gql } from "apollo-boost"
 import { useQuery } from "@apollo/react-hooks"
+import { useRouter } from "next/router"
 
-const query = gql`
-  {
-    restaurants {
-      id
-      name
-      description
-      image {
-        url
+const GET_RESTAURANT_DISHES = gql`
+    {
+      query ($id: ID!) {
+        restaurant(id: $id) {
+          id
+          name
+          dishes {
+            id
+            description
+            price
+            image {
+              url
+            }
+          }
+        }
       }
     }
-  }
 `;
 
 const Restaurants = (props) => {
-  const { loading, error, data } = useQuery(query)
+  const router = useRouter()
+  const { loading, error, data } = useQuery(GET_RESTAURANT_DISHES, {
+    variables: { id: router.query.id },
+  })
+
   const { search } = props
 
   if (error) return "レストランの読み込みに失敗しました。"
