@@ -16,7 +16,7 @@ const query = gql`
   }
 `;
 
-const RestaurantList = (props) => {
+const Restaurants = (props) => {
   const { loading, error, data } = useQuery(query)
   const { search } = props
 
@@ -78,4 +78,4 @@ const RestaurantList = (props) => {
   }
 }
 
-export default RestaurantList;
+export default Restaurants;
