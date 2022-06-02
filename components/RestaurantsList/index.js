@@ -18,14 +18,22 @@ const query = gql`
 
 const RestaurantList = (props) => {
   const { loading, error, data } = useQuery(query)
+  const { search } = props
 
   if (data) {
+    const searchQuery = data.restaurants.filter((restaurant) =>
+      restaurant.name.toLowerCase().includes(search)
+    )
     return (
       <Row>
-        {data.restaurants.map((res) => (
+        {searchQuery.map((res) => (
           <Col xs="6" sm="4" key={res.id}>
             <Card style={{ margin: "0 0.5rem 20px 0.5rem" }}>
-              <CardImg src={`${process.env.NEXT_PUBLIC_API_URL}${res.image[0].url}`} top={true} style={{ height: 250 }} />
+              <CardImg
+                src={`${process.env.NEXT_PUBLIC_API_URL}${res.image[0].url}`}
+                top={true}
+                style={{ height: 250 }}
+              />
               <CardBody>
                 <CardTitle>{res.name}</CardTitle>
                 <CardTitle>{res.description}</CardTitle>
