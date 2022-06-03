@@ -10,7 +10,7 @@ const register = () => {
   const handleRegister = () => {
     registerUser(data.username, data.email, data.password)
       .then((res) => {
-        appContext.setUser(res.data.user)
+        appContext.setUser({ ...data })
       })
       .catch((err) => console.log(err))
   }
