@@ -39,7 +39,7 @@ const register = () => {
                 </FormGroup>
                 <span>
                   <a href="">
-                    <samall>パスワードをお忘れですか？</samall>
+                    <small>パスワードをお忘れですか？</small>
                   </a>
                 </span>
                 <Button style={{ float: "right", width: 120 }} color="primary">
