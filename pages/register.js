@@ -1,6 +1,16 @@
+import { useState } from "react";
 import { Button, Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
+import { registerUser } from "../lib/auth";
 
 const register = () => {
+  const [data, setData] = useState({ username: "", email: "", password: "" })
+
+  const handleRegister = () => {
+    registerUser()
+  }
+
+  console.log(data)
+
   return (
     <Container>
       <Row>
@@ -19,6 +29,7 @@ const register = () => {
                     type="text"
                     name="username"
                     style={{ height: 50, fontsize: "1.2 rem" }}
+                    onChange={(e) => setData({ ...data, username: e.target.value })}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -27,6 +38,7 @@ const register = () => {
                     type="email"
                     name="email"
                     style={{ height: 50, fontsize: "1.2 rem" }}
+                    onChange={(e) => setData({ ...data, email: e.target.value })}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -35,6 +47,7 @@ const register = () => {
                     type="password"
                     name="password"
                     style={{ height: 50, fontsize: "1.2 rem" }}
+                    onChange={(e) => setData({ ...data, password: e.target.value })}
                   />
                 </FormGroup>
                 <span>
@@ -42,7 +55,11 @@ const register = () => {
                     <small>パスワードをお忘れですか？</small>
                   </a>
                 </span>
-                <Button style={{ float: "right", width: 120 }} color="primary">
+                <Button
+                  style={{ float: "right", width: 120 }}
+                  color="primary"
+                  onClick={() => { handleRegister() }}
+                >
                   登録
                 </Button>
               </fieldset>
