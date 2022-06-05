@@ -11,11 +11,9 @@ class MyApp extends App {
 
   state = {
     user: null,
-    cart: {
-      items: [],
-      total: 0,
-    }
-  }
+    //商品保有配列と、合計価格を格納したショッピングカートを用意。
+    cart: { items: [], total: 0 },
+  };
 
   setUser = (user) => {
     this.setState({ user })
@@ -47,6 +45,7 @@ class MyApp extends App {
   addItem = (item) => {
     let { items } = this.state.cart
     const newItem = items.find((i) => i.id === item.id)
+    console.log(newItem)
     if (!newItem) {
       item.quantity = 1
       // cartに追加する
@@ -79,7 +78,13 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props
     return (
-      <AppContext.Provider value={{ user: this.state.user, setUser: this.setUser }}>
+      <AppContext.Provider
+        value={{
+          user: this.state.user,
+          setUser: this.setUser,
+          addItem: this.addItem
+        }}
+      >
         <>
           <Head>
             <link
