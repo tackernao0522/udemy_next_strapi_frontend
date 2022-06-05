@@ -45,7 +45,7 @@ class MyApp extends App {
   addItem = (item) => {
     let { items } = this.state.cart
     const newItem = items.find((i) => i.id === item.id)
-    console.log(newItem)
+    // console.log(newItem)
     if (!newItem) {
       item.quantity = 1
       // cartに追加する
@@ -81,6 +81,7 @@ class MyApp extends App {
       <AppContext.Provider
         value={{
           user: this.state.user,
+          cart: this.state.cart,
           setUser: this.setUser,
           addItem: this.addItem
         }}
