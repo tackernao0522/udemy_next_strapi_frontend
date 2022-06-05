@@ -59,6 +59,21 @@ class MyApp extends App {
         () => Cookies.set("cart", this.state.cart.items)
       )
     }
+    // 既に同じ商品がカートに入っている時
+    else {
+      this.setState({
+        cart: {
+          items: this.state.cart.items.map((item) =>
+            item.id === newItem.id
+              ? Object.assign({}, item, { quantity: item.quantity + 1 })
+              : item
+          ),
+          total: this.state.cart.total + item.price
+        }
+      },
+        () => Cookies.set("cart", this.state.cart.items)
+      )
+    }
   }
 
   render() {
