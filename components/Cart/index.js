@@ -55,6 +55,7 @@ const Cart = () => {
                           marginLeft: 10
                         }}
                         color="link"
+                        onClick={() => appContext.removeItem(item)}
                       >
                         -
                       </Button>
