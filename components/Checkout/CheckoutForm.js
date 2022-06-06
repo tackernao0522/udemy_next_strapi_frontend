@@ -1,10 +1,20 @@
 import Cookies from "js-cookie";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FormGroup, Input, Label } from "reactstrap";
 import AppContext from "../../context/AppContext";
 import CardSecion from "./CardSecion";
 
 const CheckoutForm = () => {
+  const [data, setData] = useState({
+    address: "",
+    stripe_id: "",
+  })
+
+  const handleChange = (e) => {
+    const updateItem = (data[e.target.name] = e.target.value)
+    setData({ ...data, updateItem })
+  }
+
   const appContext = useContext(AppContext)
   // 注文を確定させる関数
   const userToken = Cookies.get("token")
@@ -16,7 +26,8 @@ const CheckoutForm = () => {
       },
       body: JSON.stringify({
         amount: Number(appContext.cart.total),
-        dishes: appContext.cart.items
+        dishes: appContext.cart.items,
+        address: data.address
       })
     })
   }
@@ -28,7 +39,7 @@ const CheckoutForm = () => {
       <FormGroup>
         <div>
           <Label>住所</Label>
-          <Input name="address" />
+          <Input name="address" onChange={(e) => handleChange(e)} />
         </div>
       </FormGroup>
 
