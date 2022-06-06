@@ -1,7 +1,26 @@
+import Cookies from "js-cookie";
+import { useContext } from "react";
 import { FormGroup, Input, Label } from "reactstrap";
+import AppContext from "../../context/AppContext";
 import CardSecion from "./CardSecion";
 
 const CheckoutForm = () => {
+  const appContext = useContext(AppContext)
+  // 注文を確定させる関数
+  const userToken = Cookies.get("token")
+  const submitOrder = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
+      method: "POST",
+      headers: userToken && {
+        Authorization: `Bearer ${userToken}`,
+      },
+      body: JSON.stringify({
+        amount: Number(appContext.cart.total),
+        dishes: appContext.cart.items
+      })
+    })
+  }
+
   return (
     <div className="paper">
       <h5>あなたの情報</h5>
