@@ -38,6 +38,12 @@ const CheckoutForm = () => {
         token: token.token.id
       })
     })
+
+    if (response.ok) {
+      console.log("注文に成功しました")
+    } else {
+      console.log("注文に失敗しました")
+    }
   }
 
   return (
@@ -51,7 +57,7 @@ const CheckoutForm = () => {
         </div>
       </FormGroup>
 
-      <CardSecion />
+      <CardSecion submitOrder={submitOrder} />
 
       <style jsx global>
         {`
